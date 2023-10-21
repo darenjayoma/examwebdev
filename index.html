@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MIDTERM EXAM CRUD OPERATION</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+       
+        <div class="card">
+
+            <h2>ENTER DATA FOR ENROLLMENT</h2>
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="middleName" placeholder="Middle Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="number" id="age" placeholder="Age">
+            <input type="text" id="gender" placeholder="Gender">
+            <input type="text" id="birthday" placeholder="Birthday">
+            <input type="text" id="course" placeholder="Course">
+            <input type="number" id="studentId" placeholder="Student ID">
+            <input type="number" id="schoolYear" placeholder="School Year">
+            <p>.</p>
+            <button id="addButton">Add</button>
+        </div>
+        <div class="card">
+            <h2>SEARCH DATA</h2>
+            <input type="number" id="searchStudentId" placeholder="Search by Student ID">
+            <button id="searchButton">Search</button>
+        </div>
+    
+        <div class="card">
+            <h2>ENTERED DATA</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Birthday</th>
+                        <th>Course</th>
+                        <th>Student ID</th>
+                        <th>School Year</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="itemList"></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const itemList = document.getElementById('itemList');
+        const addButton = document.getElementById('addButton');
+        const searchButton = document.getElementById('searchButton');
+        const searchStudentId = document.getElementById('searchStudentId');
+
+        searchButton.addEventListener('click', function () {
+            const searchValue = searchStudentId.value.trim();
+            const rows = itemList.getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const studentIdCell = row.getElementsByTagName('td')[7]; 
+                if (studentIdCell) {
+                    const studentId = studentIdCell.textContent;
+                    if (studentId === searchValue) {
+                        row.style.display = ''; 
+                    } else {
+                        row.style.display = 'none'; 
+                    }
+                }
+            }
+        });
+
+        addButton.addEventListener('click', function () {
+            const firstName = document.getElementById('firstName').value.trim();
+            const middleName = document.getElementById('middleName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const age = document.getElementById('age').value.trim();
+            const gender = document.getElementById('gender').value.trim();
+            const birthday = document.getElementById('birthday').value.trim();
+            const course = document.getElementById('course').value.trim();
+            const studentId = document.getElementById('studentId').value.trim();
+            const schoolYear = document.getElementById('schoolYear').value.trim();
+
+            if (firstName === '') {
+                alert("First Name cannot be empty.");
+                return;
+            }
+
+            const row = itemList.insertRow();
+            const cellFirstName = row.insertCell(0);
+            const cellMiddleName = row.insertCell(1);
+            const cellLastName = row.insertCell(2);
+            const cellAge = row.insertCell(3);
+            const cellGender = row.insertCell(4);
+            const cellBirthday = row.insertCell(5);
+            const cellCourse = row.insertCell(6);
+            const cellStudentId = row.insertCell(7);
+            const cellSchoolYear = row.insertCell(8);
+            const cellActions = row.insertCell(9);
+
+            cellFirstName.innerHTML = firstName;
+            cellMiddleName.innerHTML = middleName;
+            cellLastName.innerHTML = lastName;
+            cellAge.innerHTML = age;
+            cellGender.innerHTML = gender;
+            cellBirthday.innerHTML = birthday;
+            cellCourse.innerHTML = course;
+            cellStudentId.innerHTML = studentId;
+            cellSchoolYear.innerHTML = schoolYear;
+
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', function () {
+                cellFirstName.innerHTML = prompt('Edit First Name:', cellFirstName.innerHTML);
+                cellMiddleName.innerHTML = prompt('Edit Middle Name:', cellMiddleName.innerHTML);
+                cellLastName.innerHTML = prompt('Edit Last Name:', cellLastName.innerHTML);
+                cellAge.innerHTML = prompt('Edit Age:', cellAge.innerHTML);
+                cellGender.innerHTML = prompt('Edit Gender:', cellGender.innerHTML);
+                cellBirthday.innerHTML = prompt('Edit Birthday:', cellBirthday.innerHTML);
+                cellCourse.innerHTML = prompt('Edit Course:', cellCourse.innerHTML);
+                cellStudentId.innerHTML = prompt('Edit Student ID:', cellStudentId.innerHTML);
+                cellSchoolYear.innerHTML = prompt('Edit School Year:', cellSchoolYear.innerHTML);
+            });
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                row.remove();
+            });
+
+            cellActions.appendChild(editButton);
+            cellActions.appendChild(deleteButton);
+
+            document.getElementById('firstName').value = '';
+            document.getElementById('middleName').value = '';
+            document.getElementById('lastName').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('gender').value = '';
+            document.getElementById('birthday').value = '';
+            document.getElementById('course').value = '';
+            document.getElementById('studentId').value = '';
+            document.getElementById('schoolYear').value = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url(d.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.card {
+    
+    border: 1px solid #d790e0;
+    margin: 10px 0;
+    padding: 100px;
+    margin-right: 10PX;
+    width: 700px;
+    border-radius: 5px;
+    background: #daa2df;
+    align-items: center;
+}
+button {
+    background: #334861;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    cursor: pointer;
+
+}
+button.delete {
+    background: #dc3545;
+}
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
